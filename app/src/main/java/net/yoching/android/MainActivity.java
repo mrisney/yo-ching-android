@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         //  2. add wrexagram icons
         for (int i = 0; i < 64; i++) {
-            wrexagramImageIds[i] = this.getResources().getIdentifier("wrex"+String.valueOf(i+1), "drawable", this.getPackageName());
+            wrexagramImageIds[i] = this.getResources().getIdentifier("wrexagram"+String.valueOf(i+1), "drawable", this.getPackageName());
         }
 
 
