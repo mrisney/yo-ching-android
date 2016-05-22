@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/marcrisney/.gradle/caches/modules-2/files-2.1/com.uncopt/android.justified/1.0/d90b10f956c74ade92433bc662b7bd920bb10b72/android.justified-1.0.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="d90b10f956c74ade92433bc662b7bd920bb10b72">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/android.justified-1.0_2c8facb68aac373528abed2bffce1f79c1b4bdae/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.3.0_356294b770fd2a041dc496a7cddabbf38e42714c/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="00b5f97681ee5d4390e06b5916b55c563124c542">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5bb8398c4ea152967d8a382df1327095619a6394/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="aa9cd4e6af02da65a2938482ab084fda48f040e6">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_aa2e698b251630099840be37e30a8b4010833f48/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.3.0_a42f1e2311b39473ac8758a62c63f7567e0c7348/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_6c8747d2b87b18cfc966426b247b57eec22cf2e3/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/design/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.3.0_5dfa87221ec7272a0721d412ad252ea7233a111e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.2_c072414f640bad175b832826afce4c3834238028/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.3.0_391c844ec2abe37fdbb0461a84f75ebbb37e813b/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.3.0_23aa0b2610815e1fb5f70f7b27d1bd500a0d9069/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.3.0_f266d648fea1dd2e4f8a5c95ab98d886a4ef1821/classes.dex" />
+    </item>
+    <item
+        jar="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.0"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/Users/marcrisney/Projects/yo-ching-android/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.3.0_905400ce63df4fae56c089eead8767a7d1582a73/classes.dex" />
+    </item>
+
+</items>
