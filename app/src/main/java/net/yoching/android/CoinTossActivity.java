@@ -3,15 +3,22 @@ package net.yoching.android;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayDeque;
@@ -37,11 +44,21 @@ public class CoinTossActivity extends AppCompatActivity {
     //private static Aroma aroma;
     private final static String APP_TOKEN = "3e7ee9ec-9e9e-479e-a44a-24c7376d2786";
 
+    private Button throwButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_coin_toss);
+
+
+
+
+        throwButton = (Button)findViewById(R.id.throw_button);
+        throwButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
+
 
         animatedCoins = new AnimatedCoin[3];
 

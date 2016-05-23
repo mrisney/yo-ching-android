@@ -1,48 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/spray_galaxy"
-    android:alpha="0.8">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/spray_galaxy"
+        android:gravity="center_horizontal"
+        android:alpha="0.8">
 
-    <ImageView
-        android:id="@+id/wrexagram_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/wrexagram_image_view"
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal" />
 
-    <ScrollView
-        android:id="@+id/SCROLLER_ID"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:fillViewport="true">
+        <TextView
+            android:id="@+id/wrexagram_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
-    <net.yoching.android.font.SignikaFontTextView
-        android:id="@+id/wrexagram_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginLeft = "20dp"
-        android:layout_marginRight = "20dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="100dp"
-        android:textColor="#000000"
-        android:textSize="18sp"/>
-    </ScrollView>
-    <net.yoching.android.font.SignikaFontTextView
-        android:id="@+id/wrexagram_whats_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginLeft = "20dp"
-        android:layout_marginRight = "20dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:textColor="#000000"
-        android:textSize="18sp"/>
+        <net.yoching.android.font.SignikaFontTextView
+            android:id="@+id/wrexagram_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/whats_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:text="WHAT'S UP"/>
 
+        <net.yoching.android.font.SignikaFontTextView
+            android:id="@+id/wrexagram_whats_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
