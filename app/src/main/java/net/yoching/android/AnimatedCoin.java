@@ -9,7 +9,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -36,19 +35,23 @@ public class AnimatedCoin implements Runnable {
         heads =  Bitmap.createScaledBitmap(heads, w, h, true);
         tails = Bitmap.createScaledBitmap(tails, w, h, true);
 
-        this.mIsHeads = true;
+        this.mIsHeads = (Math.random() < 0.5);
         this.mHeadsImage = Bitmap.createScaledBitmap(heads, w, h, true);
         this.mTailsImage = Bitmap.createScaledBitmap(tails, w, h, true);
 
         this.coinImage = imageView;
-        this.coinImage.setImageBitmap(mHeadsImage);
+
+        if (mIsHeads) {
+            this.coinImage.setImageBitmap(mHeadsImage);
+        } else{
+            this.coinImage.setImageBitmap(mTailsImage);
+        }
+
         this.animation = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.coin_toss);
         this.animation.setTarget(coinImage);
         this.coinTossAnimator = (ObjectAnimator) animation.getChildAnimations().get(0);
 
         addListeners();
-
-        Log.d(TAG, "animated coin toss created");
 
     }
 
@@ -89,7 +92,6 @@ public class AnimatedCoin implements Runnable {
                 } else {
                     coinImage.setImageBitmap(mTailsImage);
                 }
-                Log.d(TAG, "coin toss done");
             }
         });
     }

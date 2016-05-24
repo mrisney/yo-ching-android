@@ -18,7 +18,7 @@ limitations under the License.
     <string name="app_name">YO CHING</string>
 
     <string name="coin_activity_display_message">YO CHING</string>
-
+    <string name="throw_button">THROW THE YO</string>
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -32,5 +32,18 @@ limitations under the License.
     <!-- Example settings for Data & Sync -->
 
     <!-- Example settings for Notifications -->
+
+
+    <string name="share_generic">Share</string>
+
+    <string name="title_share_text">Share Text</string>
+    <string name="share_text_description">Enter anything you would like to share on your phone in the below text box. Keep in mind the length of the content as some services limit the length of posts (Twitter, for example):</string>
+    <string name="share_text_hint">Type here</string>
+
+    <string name="title_share_picture">Share Picture</string>
+    <string name="share_picture_description">Select a picture to share out to the social-verse:</string>
+    <string name="share_picture_camera_button_text">Camera!</string>
+    <string name="share_picture_thumbnail_content_description">Captured image to share</string>
+
 
 </resources>

@@ -8,26 +8,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
-
 
 //import tech.aroma.client.Aroma;
 
@@ -35,147 +27,102 @@ import java.util.List;
 public class CoinTossActivity extends AppCompatActivity {
 
     public static final String TAG = CoinTossActivity.class.getSimpleName();
-
+    private final static String WREXAGRAM_ID = "wrexagram";
     private AnimatedCoin[] animatedCoins;
-    private ImageView wrexLineOne, wrexLineTwo, wrexLineThree, wrexLineFour, wrexLineFive, wrexLineSix;
     private Deque<ImageView> imageViewStack = new ArrayDeque<ImageView>();
     private Bitmap splitLine, strongLine;
     private StringBuffer outcomeBuffer;
+    private Button throwButton;
+    private int deviceHeight = 0;
+    private Handler handler;
+
     //private static Aroma aroma;
     private final static String APP_TOKEN = "3e7ee9ec-9e9e-479e-a44a-24c7376d2786";
-
-    private Button throwButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_coin_toss);
-
-
-
-
-        throwButton = (Button)findViewById(R.id.throw_button);
+        throwButton = (Button) findViewById(R.id.throw_button);
         throwButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
+        initCoinToss();
+    }
 
+    @Override
+    public void onPause() {
+        Log.d(TAG, "leaving coin toss activity");
+        handler.removeCallbacksAndMessages(TossListener.class);
+        super.onPause();
+    }
+
+    protected void initCoinToss(){
+        handler = new Handler();
+        deviceHeight = getResources().getDisplayMetrics().heightPixels;
 
         animatedCoins = new AnimatedCoin[3];
-
         animatedCoins[0] = new AnimatedCoin(this, (ImageView) findViewById(R.id.coin_one));
         animatedCoins[1] = new AnimatedCoin(this, (ImageView) findViewById(R.id.coin_two));
         animatedCoins[2] = new AnimatedCoin(this, (ImageView) findViewById(R.id.coin_three));
 
         int h = 30; // height in pixels
-        int w = 270; // width in pixels
-
-        wrexLineOne = (ImageView) findViewById(R.id.wrex_line_one);
-        wrexLineTwo = (ImageView) findViewById(R.id.wrex_line_two);
-        wrexLineThree = (ImageView) findViewById(R.id.wrex_line_three);
-        wrexLineFour = (ImageView) findViewById(R.id.wrex_line_four);
-        wrexLineFive = (ImageView) findViewById(R.id.wrex_line_five);
-        wrexLineSix = (ImageView) findViewById(R.id.wrex_line_six);
+        int w = 360; // width in pixels
 
         splitLine = BitmapFactory.decodeResource(this.getResources(), R.drawable.wrexagram_splitline);
         strongLine = BitmapFactory.decodeResource(this.getResources(), R.drawable.wrexagram_strongline);
         splitLine = Bitmap.createScaledBitmap(splitLine, w, h, true);
         strongLine = Bitmap.createScaledBitmap(strongLine, w, h, true);
 
-        imageViewStack.add(wrexLineOne);
-        imageViewStack.add(wrexLineTwo);
-        imageViewStack.add(wrexLineThree);
-        imageViewStack.add(wrexLineFour);
-        imageViewStack.add(wrexLineFive);
-        imageViewStack.add(wrexLineSix);
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_one));
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_two));
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_three));
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_four));
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_five));
+        imageViewStack.add((ImageView) findViewById(R.id.wrex_line_six));
 
         outcomeBuffer = new StringBuffer();
+
     }
-
-
     public void flipCoins(View view) {
-/*
-        if (outcomeBuffer.size = 6){
 
+        final List<Integer> outcomes = new ArrayList<Integer>(3);
+        for (int i = 0; i < 3; i++) {
+            int j = Math.random() > .5 ? 1 : 2;
+            outcomes.add(new Integer(j));
+            animatedCoins[i].setHeadsOrTails(j);
         }
-  */
 
-        Log.d(TAG, "wrexagram outcome buffer  : " + outcomeBuffer.toString());
+        int heads = Collections.frequency(outcomes, new Integer(2));
 
-        int coinOneOutcome = Math.random() > .5 ? 1 : 2;
-        int coinTwoOutcome = Math.random() > .5 ? 1 : 2;
-        int coinThreeOutcome = Math.random() > .5 ? 1 : 2;
-
-
-        List<Integer> outcome = new ArrayList<Integer>(3);
-
-        outcome.add(Integer.valueOf(coinOneOutcome));
-        outcome.add(Integer.valueOf(coinTwoOutcome));
-        outcome.add(Integer.valueOf(coinThreeOutcome));
-
-        int heads = Collections.frequency(outcome, new Integer(1));
-        Bitmap lineRender = splitLine;
-
+        Bitmap lineRender = null;
         if (heads >= 2) {
             lineRender = strongLine;
             outcomeBuffer.append("1");
-        } else{
+        } else {
             lineRender = splitLine;
             outcomeBuffer.append("2");
         }
+        Log.d(TAG, "wrexagram outcome buffer  : " + outcomeBuffer.toString());
 
+        if (!imageViewStack.isEmpty()) {
+            handler.postDelayed(animatedCoins[0], 400);
+            handler.postDelayed(animatedCoins[1], 200);
+            handler.postDelayed(animatedCoins[2], 100);
 
-        animatedCoins[0].setHeadsOrTails(coinOneOutcome);
-        animatedCoins[1].setHeadsOrTails(coinTwoOutcome);
-        animatedCoins[2].setHeadsOrTails(coinThreeOutcome);
-
-        Handler handler = new Handler();
-        handler.postDelayed(animatedCoins[0], 400);
-        handler.postDelayed(animatedCoins[1], 200);
-        handler.postDelayed(animatedCoins[2], 100);
-
-        Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
-
-        if (imageViewStack.isEmpty()){
-
-            int wrexnum = Integer.parseInt(outcomeBuffer.toString().substring(0,6));
-            Log.d(TAG, "wrexnum  : " + wrexnum);
-
-            int wrexagram = WrexagramUtils.getOutcome(wrexnum);
-            Log.d(TAG, "wrexagram   : " + wrexagram);
-            //Toast.makeText(CoinTossActivity.this, wrexagram, Toast.LENGTH_SHORT).show();
-
-            Intent intent= new Intent(CoinTossActivity.this,ViewWrexagramActivity.class);
-            intent.putExtra("wrexagram",wrexagram+"");
-
-            startActivity(intent);
-
-
-        } else{
-
+            Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
             ImageView wrexaLine = imageViewStack.pop();
             wrexaLine.setImageBitmap(lineRender);
-            wrexaLine.startAnimation(fadeIn);
-         }
+            wrexaLine.animate().
         }
+        Intent intent = new Intent(CoinTossActivity.this, ViewWrexagramActivity.class);
+        TossListener tossListener = new TossListener(intent, outcomeBuffer);
+        handler.postDelayed(tossListener, 2000);
+    }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-            int headsOrTails = Math.random() > .5 ? 1 : 2;
-
-            Log.d(TAG, "heads or tails : " + headsOrTails);
-
-
-            //theBoolean ^= true;
-
-
-            animatedCoins[0].isHeads(false);
-            animatedCoins[1].isHeads(true);
-            animatedCoins[2].isHeads(false);
-
-
             return true;
         }
         return super.onTouchEvent(event);
@@ -190,4 +137,27 @@ public class CoinTossActivity extends AppCompatActivity {
         return Iterables.get(set, index);
     }
     */
+
+    private class TossListener implements Runnable {
+        private StringBuffer sb;
+        private Intent intent;
+
+        public TossListener(Intent intent, StringBuffer sb) {
+            this.sb = sb;
+            this.intent = intent;
+        }
+
+        @Override
+        public void run() {
+            try {
+                if (sb.length() >= 6) {
+                    int id = WrexagramUtils.getOutcome(Integer.parseInt(sb.toString().substring(0, 6)));
+                    intent.putExtra(WREXAGRAM_ID, Integer.toString(id));
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "error with getting wrexagram outcome : " + e.toString());
+            }
+        }
+    }
 }

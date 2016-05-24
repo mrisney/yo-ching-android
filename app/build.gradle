@@ -16,6 +16,10 @@ android {
     }
     productFlavors {
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 
@@ -29,4 +33,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.uncopt:android.justified:1.0'
+
 }

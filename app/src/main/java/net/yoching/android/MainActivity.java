@@ -15,32 +15,35 @@
  */
 package net.yoching.android;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.content.Intent;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] wrexagramTitles = new String[64];
-    String[] wrexagramSubTitles = new String[64];
-    String[] wrexagramText = new String[64];
-    Integer[] wrexagramImageIds = new Integer[64];
+    private final String[] wrexagramTitles = new String[64];
+    private final String[] wrexagramSubTitles = new String[64];
+    private final String[] wrexagramText = new String[64];
+    private final Integer[] wrexagramImageIds = new Integer[64];
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -79,25 +82,17 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, position+" - clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, position+" - clicked", Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawers();
-
                 Intent intent= new Intent(MainActivity.this,ViewWrexagramActivity.class);
+
                //intent.putExtra("string",Yourlist.get(pos).sms);
-
-
                 intent.putExtra("wrexagram",position+1+"");
-
-
-
                 startActivity(intent);
                 finish();
-
             }
         });
-
     }
-
 
     private void addDrawerItems() {
 
@@ -132,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("64 Wrexagrams");
+
+                SpannableString s = new SpannableString("64 WREXAGRAMS");
+                s.setSpan(new TypefaceSpan("Exo-Bold.otf"), 0, s.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                getSupportActionBar().setTitle(s);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 

@@ -7,6 +7,8 @@
     android:background="@drawable/spray_galaxy"
     android:orientation="vertical"
     android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     tools:context=".CoinTossActivity">
 
     <LinearLayout
@@ -60,7 +62,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center|bottom"
-        android:layout_marginBottom = "40dp"
+        android:layout_marginBottom = "50dp"
         android:orientation="horizontal">
 
 
@@ -88,13 +90,14 @@
             android:layout_alignParentBottom="true" />
     </LinearLayout>
 
+
     <Button
         android:id="@+id/throw_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_weight="1"
         android:layout_alignParentBottom="true"
-        android:text="Throw the Yo"
+        android:text="@string/throw_button"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:background="#000000"

@@ -24,8 +24,27 @@ public class ViewWrexagramActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        /*
+        Button sharePictureButton = (Button)findViewById(R.id.main_share_picture_button);
+        sharePictureButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SharePictureActivity.class);
+                startActivity(intent);
+            }
+        });
+
+*/
+
+
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wrexagram);
+
 
         String jsonString = WrexagramUtils.getResourceText(this, R.raw.wrexagrams);
         Gson gson = new GsonBuilder().create();
