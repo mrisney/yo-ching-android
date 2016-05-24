@@ -40,21 +40,25 @@ limitations under the License.
             </intent-filter>
         </activity>
 
+        <!--
         <activity android:name=".CoinTossActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
         <activity android:name=".ViewWrexagramActivity"
-                  android:parentActivityName=".CoinTossActivity">
+                  android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.yoching.android.CoinTossActivity" />
+                android:value="net.yoching.android.MainActivity" />
         </activity>
 
-
-        SharePictureActivity
 
         <activity android:name="net.yoching.android.SharePictureActivity"
             android:label="@string/title_share_picture"

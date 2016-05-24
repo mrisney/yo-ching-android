@@ -112,7 +112,7 @@ public class CoinTossActivity extends AppCompatActivity {
             Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
             ImageView wrexaLine = imageViewStack.pop();
             wrexaLine.setImageBitmap(lineRender);
-            wrexaLine.animate().
+            wrexaLine.setAnimation(fadeIn);
         }
         Intent intent = new Intent(CoinTossActivity.this, ViewWrexagramActivity.class);
         TossListener tossListener = new TossListener(intent, outcomeBuffer);
