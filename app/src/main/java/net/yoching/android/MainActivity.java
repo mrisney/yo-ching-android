@@ -15,6 +15,8 @@
  */
 package net.yoching.android;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -25,6 +27,7 @@ import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
@@ -116,9 +119,20 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, position+" - clicked", Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawers();
                 Intent intent= new Intent(MainActivity.this,ViewWrexagramActivity.class);
-
                //intent.putExtra("string",Yourlist.get(pos).sms);
                 intent.putExtra("wrexagram",position+1+"");
+
+                PendingIntent pendingIntent =
+                        TaskStackBuilder.create(MainActivity.this)
+                                // add all of DetailsActivity's parents to the stack,
+                                // followed by DetailsActivity itself
+                                .addNextIntentWithParentStack(intent)
+                                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this);
+                builder.setContentIntent(pendingIntent);
+
+
                 startActivity(intent);
                 finish();
             }
@@ -190,19 +204,17 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
 
                 SpannableString s = new SpannableString("64 WREXAGRAMS");
-                s.setSpan(new TypefaceSpan("Exo-Bold.otf"), 0, s.length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
+                s.setSpan(new TypefaceSpan("Exo-Bold.otf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 getSupportActionBar().setTitle(s);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+
+               // invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+             //   invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
             }
         };

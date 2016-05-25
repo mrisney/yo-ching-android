@@ -3,8 +3,10 @@ package net.yoching.android;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +27,6 @@ public class ViewWrexagramActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         /*
         Button sharePictureButton = (Button)findViewById(R.id.main_share_picture_button);
         sharePictureButton.setOnClickListener(new View.OnClickListener() {
@@ -38,10 +39,6 @@ public class ViewWrexagramActivity extends AppCompatActivity {
         });
 
 */
-
-
-
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wrexagram);
 
@@ -49,23 +46,21 @@ public class ViewWrexagramActivity extends AppCompatActivity {
         String jsonString = WrexagramUtils.getResourceText(this, R.raw.wrexagrams);
         Gson gson = new GsonBuilder().create();
 
-        Type collectionType = new TypeToken<List<Wrexagram>>() {}.getType();
+        Type collectionType = new TypeToken<List<Wrexagram>>() {
+        }.getType();
         wrexagramList = gson.fromJson(jsonString, collectionType);
 
         wrexagramImageView = (ImageView) findViewById(R.id.wrexagram_image_view);
+
         titleTextView = (TextView) findViewById(R.id.wrexagram_title);
         titleTextView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
-
         wrexagramTextView = (TextView) findViewById(R.id.wrexagram_text_view);
 
         whatsUp = (TextView) findViewById(R.id.whats_up);
         whatsUp.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
-
         whatsUpTextView = (TextView) findViewById(R.id.wrexagram_whats_up);
 
-
-        Intent iin = getIntent();
-        Bundle b = iin.getExtras();
+        Bundle b = getIntent().getExtras();
 
         if (b != null) {
 
@@ -81,6 +76,17 @@ public class ViewWrexagramActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d(TAG, "wrexagram  error : " + e.toString());
             }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                startActivity(upIntent);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
