@@ -18,12 +18,12 @@ import android.widget.ImageView;
 public class AnimatedCoin implements Runnable {
 
     public static final String TAG = AnimatedCoin.class.getSimpleName();
+    Bitmap mHeadsImage, mTailsImage;
     private AnimatorSet animation;
     private int headsOrTails;
     private ObjectAnimator coinTossAnimator;
     private boolean mIsHeads;
     private ImageView coinImage;
-    Bitmap mHeadsImage, mTailsImage;
 
     public AnimatedCoin(Context context, ImageView imageView) {
 
@@ -32,7 +32,7 @@ public class AnimatedCoin implements Runnable {
 
         int h = 216; // height in pixels
         int w = 216; // width in pixels
-        heads =  Bitmap.createScaledBitmap(heads, w, h, true);
+        heads = Bitmap.createScaledBitmap(heads, w, h, true);
         tails = Bitmap.createScaledBitmap(tails, w, h, true);
 
         this.mIsHeads = (Math.random() < 0.5);
@@ -43,7 +43,7 @@ public class AnimatedCoin implements Runnable {
 
         if (mIsHeads) {
             this.coinImage.setImageBitmap(mHeadsImage);
-        } else{
+        } else {
             this.coinImage.setImageBitmap(mTailsImage);
         }
 

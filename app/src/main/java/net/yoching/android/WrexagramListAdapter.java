@@ -13,22 +13,23 @@ import android.widget.TextView;
  */
 
 
-public class WrexagramListAdapter extends ArrayAdapter<String>{
+public class WrexagramListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
     private final String[] titles;
     private final String[] subTitles;
     private final Integer[] imageIds;
 
-    public WrexagramListAdapter(Activity context,String[] titles, String[] subTitles, Integer[] imageIds) {
+    public WrexagramListAdapter(Activity context, String[] titles, String[] subTitles, Integer[] imageIds) {
 
-        super(context, R.layout.list_single,titles);
+        super(context, R.layout.list_single, titles);
         this.context = context;
         this.titles = titles;
         this.subTitles = subTitles;
         this.imageIds = imageIds;
 
     }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
@@ -37,10 +38,11 @@ public class WrexagramListAdapter extends ArrayAdapter<String>{
         TextView idView = (TextView) rowView.findViewById(R.id.wrexagramId);
 
         int id = 1;
-        try{
-            id = id+position;
-        } catch (Exception e){}
-        idView.setText(id+"");
+        try {
+            id = id + position;
+        } catch (Exception e) {
+        }
+        idView.setText(id + "");
 
         TextView titleView = (TextView) rowView.findViewById(R.id.title);
         titleView.setText(titles[position]);

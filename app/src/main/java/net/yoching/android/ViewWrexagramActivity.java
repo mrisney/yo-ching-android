@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +46,14 @@ public class ViewWrexagramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wrexagram);
 
+
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, Gravity.END | Gravity.CENTER_VERTICAL);
+
+        View customNav = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setCustomView(customNav, layoutParams);
+         actionBar.setDisplayShowCustomEnabled(true);
 
         String jsonString = WrexagramUtils.getResourceText(this, R.raw.wrexagrams);
         Gson gson = new GsonBuilder().create();

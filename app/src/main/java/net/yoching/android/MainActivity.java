@@ -35,8 +35,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -287,14 +285,30 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "wrexagram outcome buffer  : " + outcomeBuffer.toString());
 
         if (!imageViewStack.isEmpty()) {
-            handler.postDelayed(animatedCoins[0], 400);
-            handler.postDelayed(animatedCoins[1], 200);
-            handler.postDelayed(animatedCoins[2], 100);
 
-            Animation fadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fadein);
-            ImageView wrexaLine = imageViewStack.pop();
+            List<Long> list = new ArrayList<Long>();
+            for(int i=2;i<6;i++){
+                list.add(new Long(i*100));  // list contains: [2,3,4,5]
+            }
+            Collections.shuffle(list);
+
+
+            handler.postDelayed(animatedCoins[0], list.get(0));
+            handler.postDelayed(animatedCoins[1], list.get(1));
+            handler.postDelayed(animatedCoins[2], list.get(2));
+
+
+            final ImageView wrexaLine = imageViewStack.pop();
             wrexaLine.setImageBitmap(lineRender);
-            wrexaLine.setAnimation(fadeIn);
+            wrexaLine.setVisibility(View.INVISIBLE);
+            wrexaLine.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    wrexaLine.setVisibility(View.VISIBLE);
+                }
+            }, 2300);
+
+
         }
         Intent intent = new Intent(MainActivity.this, ViewWrexagramActivity.class);
         TossListener tossListener = new TossListener(intent, outcomeBuffer);
