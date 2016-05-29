@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
             animatedCoins[i].setHeadsOrTails(j);
         }
 
-        int heads = Collections.frequency(outcomes, new Integer(2));
+        int heads = Collections.frequency(outcomes, new Integer(1));
 
         Bitmap lineRender = null;
         if (heads >= 2) {
@@ -327,7 +327,12 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             try {
                 if (sb.length() >= 6) {
-                    int id = WrexagramUtils.getOutcome(Integer.parseInt(sb.toString().substring(0, 6)));
+                    // get the first 6 characters
+                    String wrexnum = sb.toString().substring(0, 6);
+                    Log.d(TAG, "wrexnum stringbuffer generated : " +wrexnum);
+                    int id = WrexagramUtils.getOutcome(Integer.parseInt(wrexnum));
+                    Log.d(TAG, "wrexnum generated : " +id);
+
                     intent.putExtra(WREXAGRAM_ID, Integer.toString(id));
                     startActivity(intent);
                 }

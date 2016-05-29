@@ -60,6 +60,7 @@ public class AnimatedCoin implements Runnable {
     }
 
     public void setHeadsOrTails(int headsOrTails) {
+
         this.headsOrTails = headsOrTails;
     }
 
@@ -87,7 +88,7 @@ public class AnimatedCoin implements Runnable {
         this.coinTossAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (headsOrTails > 1) {
+                if (headsOrTails < 2) {
                     coinImage.setImageBitmap(mHeadsImage);
                 } else {
                     coinImage.setImageBitmap(mTailsImage);
