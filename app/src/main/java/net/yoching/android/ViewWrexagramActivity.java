@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +23,7 @@ import java.util.List;
 public class ViewWrexagramActivity extends AppCompatActivity {
 
     public static final String TAG = ViewWrexagramActivity.class.getSimpleName();
-    private TextView titleTextView, wrexagramTextView, whatsUpTextView, whatsUp;
+    private TextView toolbarTitle, titleTextView, wrexagramTextView, whatsUpTextView, whatsUp;
     private ImageView wrexagramImageView;
     private List<Wrexagram> wrexagramList;
 
@@ -46,20 +45,21 @@ public class ViewWrexagramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wrexagram);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, Gravity.END | Gravity.CENTER_VERTICAL);
 
-        View customNav = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setLogo(R.drawable.ic_launcher);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setCustomView(customNav, layoutParams);
-         actionBar.setDisplayShowCustomEnabled(true);
+        toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
 
         String jsonString = WrexagramUtils.getResourceText(this, R.raw.wrexagrams);
         Gson gson = new GsonBuilder().create();
 
-        Type collectionType = new TypeToken<List<Wrexagram>>() {
-        }.getType();
+        Type collectionType = new TypeToken<List<Wrexagram>>() {}.getType();
         wrexagramList = gson.fromJson(jsonString, collectionType);
 
         wrexagramImageView = (ImageView) findViewById(R.id.wrexagram_image_view);
@@ -80,6 +80,7 @@ public class ViewWrexagramActivity extends AppCompatActivity {
                 String wrexagramId = (String) b.get("wrexagram");
                 int id = Integer.parseInt(wrexagramId);
                 Log.d(TAG, "wrexagram  id : " + id);
+                toolbarTitle.setText("WREXAGRAM "+id);
                 setImage(id);
                 setWrexagramTitle(id);
                 setText(id);
@@ -90,6 +91,19 @@ public class ViewWrexagramActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    public void applyActionBar(android.support.v7.app.ActionBar ab, ActionBarActivity mContext, View custom) {
+        ab = mContext.getSupportActionBar();
+        ab.setCustomView(custom);
+       // ab.setTitle(R.string.st_action_title_main);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+        ab.setDisplayShowCustomEnabled(true);
+        //ab.setLogo(R.drawable.conect_icon);
+        ab.setDisplayUseLogoEnabled(true); }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

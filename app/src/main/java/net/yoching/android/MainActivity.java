@@ -28,6 +28,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
@@ -40,6 +41,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private final static String WREXAGRAM_ID = "wrexagram";
+    //private static Aroma aroma;
+    private final static String APP_TOKEN = "3e7ee9ec-9e9e-479e-a44a-24c7376d2786";
+    private final String[] wrexagramTitles = new String[64];
+    private final String[] wrexagramSubTitles = new String[64];
+    private final String[] wrexagramText = new String[64];
+    private final Integer[] wrexagramImageIds = new Integer[64];
     private AnimatedCoin[] animatedCoins;
     private Deque<ImageView> imageViewStack = new ArrayDeque<ImageView>();
     private Bitmap splitLine, strongLine;
@@ -63,16 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private Button throwButton;
     private int deviceHeight = 0;
     private Handler handler;
-
-    //private static Aroma aroma;
-    private final static String APP_TOKEN = "3e7ee9ec-9e9e-479e-a44a-24c7376d2786";
-
-
-    private final String[] wrexagramTitles = new String[64];
-    private final String[] wrexagramSubTitles = new String[64];
-    private final String[] wrexagramText = new String[64];
-    private final Integer[] wrexagramImageIds = new Integer[64];
-
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
@@ -80,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private String mActivityTitle;
 
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,19 +92,26 @@ public class MainActivity extends AppCompatActivity {
         initCoinToss();
         addDrawerItems();
 
-        WrexagramListAdapter adapter = new  WrexagramListAdapter(MainActivity.this, wrexagramTitles, wrexagramSubTitles, wrexagramImageIds);
+        WrexagramListAdapter adapter = new WrexagramListAdapter(MainActivity.this, wrexagramTitles, wrexagramSubTitles, wrexagramImageIds);
 
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList = (ListView) findViewById(R.id.navList);
 
         mDrawerList.setAdapter(adapter);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
 
-       setupDrawer();
+        setupDrawer();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       //getSupportActionBar().setLogo(R.drawable.ic_launcher);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Exo-ExtraBold.otf"));
 
         int width = getResources().getDisplayMetrics().widthPixels;
         DrawerLayout.LayoutParams params = (android.support.v4.widget.DrawerLayout.LayoutParams) mDrawerList.getLayoutParams();
@@ -116,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(MainActivity.this, position+" - clicked", Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawers();
-                Intent intent= new Intent(MainActivity.this,ViewWrexagramActivity.class);
-               //intent.putExtra("string",Yourlist.get(pos).sms);
-                intent.putExtra("wrexagram",position+1+"");
+                Intent intent = new Intent(MainActivity.this, ViewWrexagramActivity.class);
+                //intent.putExtra("string",Yourlist.get(pos).sms);
+                intent.putExtra("wrexagram", position + 1 + "");
 
                 PendingIntent pendingIntent =
                         TaskStackBuilder.create(MainActivity.this)
@@ -142,18 +149,19 @@ public class MainActivity extends AppCompatActivity {
         String jsonString = WrexagramUtils.getResourceText(this, R.raw.wrexagrams);
         Gson gson = new GsonBuilder().create();
 
-        Type collectionType = new TypeToken<List<Wrexagram>>(){}.getType();
+        Type collectionType = new TypeToken<List<Wrexagram>>() {
+        }.getType();
         List<Wrexagram> wrexagramList = gson.fromJson(jsonString, collectionType);
 
         // 1. add wrexagram titles and subtitles
         for (int i = 0; i < 64; i++) {
-            wrexagramTitles[i] = wrexagramList.get(i).getTitle() +"\n";
+            wrexagramTitles[i] = wrexagramList.get(i).getTitle() + "\n";
             wrexagramSubTitles[i] = wrexagramList.get(i).getSubtitle();
         }
 
         //  2. add wrexagram icons
         for (int i = 0; i < 64; i++) {
-            wrexagramImageIds[i] = this.getResources().getIdentifier("wrexagram"+String.valueOf(i+1), "drawable", this.getPackageName());
+            wrexagramImageIds[i] = this.getResources().getIdentifier("wrexagram" + String.valueOf(i + 1), "drawable", this.getPackageName());
         }
 
 
@@ -161,11 +169,10 @@ public class MainActivity extends AppCompatActivity {
         // /mDrawerList.setAdapter(mAdapter);
 
 
-
     }
 
 
-    protected void initCoinToss(){
+    protected void initCoinToss() {
         handler = new Handler();
         deviceHeight = getResources().getDisplayMetrics().heightPixels;
 
@@ -205,14 +212,14 @@ public class MainActivity extends AppCompatActivity {
                 s.setSpan(new TypefaceSpan("Exo-Bold.otf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 getSupportActionBar().setTitle(s);
 
-               // invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                // invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
-             //   invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                //   invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
             }
         };
@@ -237,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -287,8 +294,8 @@ public class MainActivity extends AppCompatActivity {
         if (!imageViewStack.isEmpty()) {
 
             List<Long> list = new ArrayList<Long>();
-            for(int i=2;i<6;i++){
-                list.add(new Long(i*100));  // list contains: [2,3,4,5]
+            for (int i = 2; i < 6; i++) {
+                list.add(new Long(i * 100));  // list contains: [2,3,4,5]
             }
             Collections.shuffle(list);
 
@@ -314,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
         TossListener tossListener = new TossListener(intent, outcomeBuffer);
         handler.postDelayed(tossListener, 2000);
     }
+
     private class TossListener implements Runnable {
         private StringBuffer sb;
         private Intent intent;
@@ -329,9 +337,9 @@ public class MainActivity extends AppCompatActivity {
                 if (sb.length() >= 6) {
                     // get the first 6 characters
                     String wrexnum = sb.toString().substring(0, 6);
-                    Log.d(TAG, "wrexnum stringbuffer generated : " +wrexnum);
+                    Log.d(TAG, "wrexnum stringbuffer generated : " + wrexnum);
                     int id = WrexagramUtils.getOutcome(Integer.parseInt(wrexnum));
-                    Log.d(TAG, "wrexnum generated : " +id);
+                    Log.d(TAG, "wrexnum generated : " + id);
 
                     intent.putExtra(WREXAGRAM_ID, Integer.toString(id));
                     startActivity(intent);
